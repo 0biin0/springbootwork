@@ -23,6 +23,7 @@ public class Config {
 		// constructor 를 이용한 의존성 주입
 	    return new Person("이순신", "장군", new PrinterA());
 	}
+	// Person hello = new Person("이순신", "장군", new PrinterA()); @Bean(name="hello")같은뜻
 	
 	@Bean
 	public PrinterA printerA() {
