@@ -7,6 +7,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import com.study.springboot.multi.Config;
 import com.study.springboot.multi.Person;
+import com.study.springboot.multi.Printer;
 
 // @SpringBootApplication
 public class Ex01JavaDiApplication {
@@ -18,6 +19,19 @@ public class Ex01JavaDiApplication {
 		
 		Person Person1 = (Person)context.getBean("Person1");
 		Person1.print();
+		
+		Person Person2 = context.getBean("hello", Person.class);
+		Person2.print();
+		
+		Printer printer = context.getBean("printerB", Printer.class);
+		Person1.setPrinter(printer);
+		Person1.print();
+		
+		if(Person1 == Person2) {
+			System.out.println("같은 객체");
+		} else {
+			System.out.println("다른 객체");
+		}
 	}
 
 }
