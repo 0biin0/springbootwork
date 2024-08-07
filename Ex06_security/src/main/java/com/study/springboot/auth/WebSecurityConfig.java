@@ -52,7 +52,6 @@ public class WebSecurityConfig {
 		return new InMemoryUserDetailsManager(user, admin);
 		
 	}
-	
 	// 패스워드 암호화
 	public PasswordEncoder passwordEncoder() {
 		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
