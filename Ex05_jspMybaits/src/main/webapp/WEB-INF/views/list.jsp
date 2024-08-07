@@ -16,7 +16,7 @@
    <div id="outer">
       <br>
       <h1>게 시 판</h1>
-      <p>총 레코드수 : </p>
+      <p class="alignRight">총 레코드수 : </p>
       <table class="table">
          <tr>
             <th>번호</th>
