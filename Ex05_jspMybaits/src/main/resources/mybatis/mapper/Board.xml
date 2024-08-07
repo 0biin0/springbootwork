@@ -2,9 +2,28 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
+
 <mapper namespace="com.study.springboot.repository.BoardDao">
 	<select id="totalRecord" resultType="_int">
-		select count(*) from boardtest
+		select count(*) from boardtest 
 	</select>
+	
+	<select id="list" resultType="com.study.springboot.dto.Board">
+		select * from boardtest order by boardno desc
+	</select>
+	
+	<select id="detailBoard" resultType="com.study.springboot.dto.Board">
+		select * from boardtest where boardno = #{boardno}
+	</select>
+	
+	<delete id="deleteBoard">
+		delete from boardtest where boardno = #{boardno}
+	</delete>
+	
+	<insert id="insertBoard">
+		insert into boardtest values(seq_boardtest.nextval, #{title}, #{name}, #{content})
+	</insert>
 </mapper>
+
+
+
