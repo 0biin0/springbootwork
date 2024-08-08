@@ -13,7 +13,7 @@ public class MemberService {
 	MemberRepository memberRepository;
 	
 	public Member insert(Member member) {
-		// save() : insert할 떄의 메소드(JPA에 API)
+		// save() : insert할 때의 메소드(JPA에 API)
 		Member rmember =memberRepository.save(member);
 		return rmember;
 	}

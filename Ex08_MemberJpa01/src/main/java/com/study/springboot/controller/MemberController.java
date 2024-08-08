@@ -19,18 +19,18 @@ public class MemberController {
 	
 	@RequestMapping("/")
 	public String root() {
-		return "/menu";
+		return "menu";
 	}
 	
 	@RequestMapping("/insert")
 	public String insert(@RequestParam("username") String username, Model model) {
 		Member member = Member.builder()
-						.username(username)
-						.createDate(LocalDate.now())
-						.build();
-		
+							  .username(username)
+							  .createDate(LocalDate.now())
+							  .build();
 		Member result = memberService.insert(member);
 		model.addAttribute("member", result);
+		
 		return "insert";
 	}
 	
