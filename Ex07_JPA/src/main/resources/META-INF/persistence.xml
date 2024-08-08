@@ -7,7 +7,8 @@
     <persistence-unit name="JpaEx01" transaction-type="RESOURCE_LOCAL">
     <!-- <class>exam1.Member1</class>
      <class>exam2.Member2</class> -->
-     <class>exam3.Member3</class>
+    <!--  <class>exam3.Member3</class> -->
+    <class>exam4.Member4</class>
      
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
@@ -24,7 +25,11 @@
     	<property name="hibernate.format_sql" value="true" />
     	<property name="hibernate.id.new_generator_mappings" value="true" />
     	
-    	<property name="hibernate.hbm2ddl.auto" value="create" />
+    	<!-- 테이블 생성시 -->
+    	<!-- <property name="hibernate.hbm2ddl.auto" value="create" /> -->
+    	
+    	<!-- insert, select, update, delete -->
+    	<property name="hibernate.hbm2ddl.auto" value="none" />
     	
     	<!-- 
     		- create : 애플리케이션이 실행될 때 테이블 생성. 기존 테이블은 삭제하고 새로 생성
