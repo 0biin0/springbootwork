@@ -84,7 +84,19 @@ public class BoardController {
 	public String writerForm() {
 		return "writerForm";
 	}
-	
+	   /*
+     * 커맨드 객체 방식
+     * : 객체로 받을 때 사용
+     * 요청시 전달값의 키(name속성의 값) 을 객체에 담고자하는 필드명으로 작성
+     * 스프링 컨테이너가 해당 객체를 기본생성자로 생성후 setter 메소드를 호출하여 넣는다
+     * 
+      */
+      @RequestMapping("/write")
+      	public String write(Board b) {
+      			String title = b.getTitle();
+      			return "redirect:list";
+      }
+    
 	@RequestMapping("/write")
 	public String write(HttpServletRequest request) {
 		String title = request.getParameter("title");
