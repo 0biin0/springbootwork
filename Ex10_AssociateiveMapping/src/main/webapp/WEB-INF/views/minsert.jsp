@@ -8,8 +8,8 @@
 </head>
 <body>
 	<h1>회원 등록 성공</h1>
-	Id : ${member.id}
-	NAME : ${member.name }
+	Id : ${member.id}<br><br>
+	NAME : ${member.name }<br><br>
 	생성된 날짜 : ${member.createdAt }
 </body>
 </html>

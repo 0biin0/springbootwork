@@ -9,7 +9,8 @@
 <body>
 	<h1>게시글 등록 성공</h1>
 	제목 : ${board.title}<br><br>
-	내용 : ${board.content }
+	내용 : ${board.content }<br><br>
+	작성자 :  ${member.id }
 
 </body>
 </html>
