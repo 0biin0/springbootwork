@@ -7,9 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Member JPA #02 - SelectById</h1>
+	<h1>Member JPA #02 - SelectByName</h1>
 	아이디 : ${member.id}<br>
 	이름 : ${member.username}<br>
-	날짜 : ${member.createDate}
+	날짜 : ${member.email}
 </body>
 </html>
