@@ -14,12 +14,21 @@ import com.study.springboot.repository.MemberRepository;
 
 @Service
 public class MemberService {
-   
-   @Autowired
-   MemberRepository memberRepository;
+	
+	@Autowired
+	MemberRepository memberRepository;
 
-   public List<Member> selectByNameLike1(String search) {
-      
-      return memberRepository.findByNameLike(search);
-   }
+	public List<Member> selectByNameLike1(String search) {
+		return memberRepository.findByNameLike(search);
+	}
+
+	public List<Member> selectByNameLike2(String search, Sort sort) {
+		return memberRepository.findMembers(search, sort);
+	}
+
+	public Page<Member> selectMembers3(String search, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return memberRepository.findMembers(search, pageable);
+	}
+
 }

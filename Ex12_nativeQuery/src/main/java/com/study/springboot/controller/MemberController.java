@@ -26,10 +26,32 @@ public class MemberController {
       return "menu";
    }
    
-   @RequestMapping("/selectByNameLike")
-   public String selectByNameLike(String name, Model model) {
+   @RequestMapping("/selectByNameLike1")
+   public String selectByNameLike1(String name, Model model) {
       String search = name + "%";
-      List<Member> result = memberService.selectByNameLike1(name);
+      List<Member> result = memberService.selectByNameLike1(search);
+      model.addAttribute("members", result);
       return "selectList1";
    }
+   
+   @RequestMapping("/selectByNameLike1")
+   public String selectByNameLike2(String name, int page, Model model) {
+      String search = name + "%";
+      
+      Sort sort = Sort.by(Sort.Order.asc("id"));
+      Pageable pageable = PageRequest.of(page-1, 10, sort);
+      
+      Page<Member> result = memberService.selectMembers3(search, pageable);
+      
+      model.addAttribute("members", result.getContent());
+      model.addAttribute("members", result.getTotalElements());
+      
+      return "selectList1";
+   }
+   
+   
+   
 }
+
+
+
