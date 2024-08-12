@@ -14,7 +14,14 @@
 	한 페이지 당 항목 수 :${ nowPage}<br>
 	현재 페이지 :${ numberOfElements}<br>
 
+	<hr>
 	
+	<c:forEach items="${members}" var="m">
+		아이디 : ${m.id}<br>
+		이름 : ${m.name}<br>
+		이메일 : ${m.email}<br><br>
+		<hr>
+	</c:forEach>
 	
 </body>
 </html>
