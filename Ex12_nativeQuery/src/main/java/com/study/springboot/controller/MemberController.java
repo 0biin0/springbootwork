@@ -61,7 +61,7 @@ public class MemberController {
 		return "selectList2";
 	}
 	
-	@RequestMapping("/selectByNameLike5")
+	@RequestMapping("/selectByNameLike4")
 	public String selectByNameLike4(String name, Model model) {
 		String search = name + "%";
 		
@@ -70,8 +70,4 @@ public class MemberController {
 		model.addAttribute("members", result);
 		return "selectList1";
 	}
-	
 }
-
-
-
