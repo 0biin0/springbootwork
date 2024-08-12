@@ -20,6 +20,6 @@ public class MemberService {
 
    public List<Member> selectByNameLike1(String search) {
       
-      return memberRepository.findByNameLike1(search);
+      return memberRepository.findByNameLike(search);
    }
 }
