@@ -16,7 +16,7 @@ public class BoardController {
 	BoardService boardService;
 	
 	@RequestMapping("/binsert") 
-		public String binsert(Board board, Model model) {
+		public String binsert(Board board, Model model) {//Model 보내주는값
 			Member m = new Member();
 			m.setId("user01");
 			
@@ -26,5 +26,6 @@ public class BoardController {
 			model.addAttribute("board", b);
 			return "binsert";
 		}
+	
 	
 }

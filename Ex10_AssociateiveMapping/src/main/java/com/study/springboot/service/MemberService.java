@@ -14,12 +14,16 @@ public class MemberService {
 	@Autowired
 	MemberRepository memberRepository;
 	
-	public Member minsert(Member member) {
+	public Member minsert(Member member) { //minsert -> 메소드
 		return memberRepository.save(member);
 	}
 
 	public Optional<Member> selectById(String id) {
 		return memberRepository.findById(id);
+	}
+
+	public Member modify(Member member) { 
+		return memberRepository.save(member);
 	}
 
 }
