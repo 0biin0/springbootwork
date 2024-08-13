@@ -10,7 +10,7 @@
 	<div th:replace="~{/fragments/header.html :: fragment-menu}"></div>
 	<h1 align="center">회원가입</h1>
 	
-	<form method="post" action="" id="enrollForm">
+	<form method="post" action="memberInsert" id="enrollForm">
 		<table align="center">
 			<tr>
 				<td>* ID</td>
@@ -71,6 +71,13 @@
 						data : {id :  $idInput.val()},
 						success : function(result) {
 							console.log(result);
+							if(result){
+								$("#checkResult").show();
+								$("#checkResult").css("color", "red").text("중복된 아이디입니다. 다시 입력하세요");
+							}else {
+								$("#checkResult").show();
+								$("#checkResult").css("color", "green").text("사용가능한 아이디 입니다");
+							}
 						},
 						error:function() {
 							console.log("아이디 중복체크 ajax 통신 실패");
