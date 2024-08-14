@@ -36,10 +36,15 @@ public class MemberController {
 	public String enrollForm() {
 		return "member/enrollForm";
 	}
+
+	@GetMapping("/myPage")
+	public String myPage() {
+		return "member/myPage";
+	}
 	
 	@GetMapping("/idCheck")
-	/*@ResponseBody 여기다가 해줘도 됨*/
-	public @ResponseBody boolean idCheck(@RequestParam("id") String id) {
+	@ResponseBody
+	public boolean idCheck(@RequestParam("id") String id) {
 		return memberService.idCheck(id);
 	}
 	
@@ -53,31 +58,27 @@ public class MemberController {
 	
 	@PostMapping("/login")
 	public String login(Member member, Model model) {
-		 Optional<Member> loginUser = memberService.login(member);
-		 if(loginUser.isPresent()) {
-			 Member m = loginUser.get();
-			 if(passwordEncoder.matches(member.getPassword(), m.getPassword())) {
-				 model.addAttribute("loginUser", m);
-				 // 원래 requestScope => sessionScope로 바꾸기
-				 // 클래스에 @SessionAttributes({"loginUser"}) 어노테이션 달기
-				 
-			 }
-		 }else {
-			 
-		 }
+		Optional<Member> loginUser = memberService.login(member);
+		if(loginUser.isPresent()) {
+			Member m = loginUser.get();
+			if(passwordEncoder.matches(member.getPassword(), m.getPassword())) {
+				model.addAttribute("loginUser", m);		
+				// 원래 requestScope => sessionScope로 바꾸기							
+				// 클래스에 @SessionAttributes({"loginUser"})어노테이션 달기
+			}
+		}
 		return "redirect:/";
 	}
-	/*
-	  @SessionAttributes + model을 통해 로그인정보를 관리하는 경우
-	    SessionStatus객체를 통해 사용완료 처리해야 한다.
-	    - session객체를 폐기하지 않고 재사용
-	 */
 	
+	/*
+	 * @SessionAttributes + model을 통해 로그인정보를 관리하는 경우
+	     SessionStatus객체를 통해 사용완료 처리해야 한다.
+	     - session객체를 폐기하지 않고 재사용 
+	 */
 	@GetMapping("/logout")
 	public String logout(SessionStatus status) {
-		if(!status.isComplete()) {//아직 session이 살아있는 상태이면
-			status.setComplete(); 
-		}
+		if(!status.isComplete())
+			status.setComplete();
 		return "redirect:/";
 	}
 }

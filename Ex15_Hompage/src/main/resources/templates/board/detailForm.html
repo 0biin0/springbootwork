@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 상세보기</title>
+    <link href="css/index.css" rel="stylesheet"/>
+    <link href="css/boardList.css" rel="stylesheet"/>
+</head>
+<body>
+    <div th:replace="~{/fragments/header.html :: fragment-menu}"></div>
+    <h1 align="center">게시글 상세보기</h1>
+
+    <div class="outer" style="max-width: 800px; margin: auto;">
+
+        <h2 th:text="${board.title}">Title here</h2>
+        
+                <div>
+            <p><strong>작성자:</strong> <span th:text="${board.writer}">Author here</span></p>
+        </div>
+        
+
+        <div>
+            <h3>내용</h3>
+            <p th:text="${board.content}">Content here</p>
+        </div>
+
+        <div align="center">
+            <a href="#" th:href="@{/list(nowPage=${nowPage})}">목록으로 돌아가기</a>
+        </div>
+
+        <div th:if="${loginUser != null}" align="right">
+            <a th:href="@{/editForm(bno=${board.bno})}">[수정]</a>
+            <a th:href="@{/delete(bno=${board.bno})}" onclick="return confirm('정말 삭제하시겠습니까?');">[삭제]</a>
+        </div>
+    </div>
+</body>
+</html>
