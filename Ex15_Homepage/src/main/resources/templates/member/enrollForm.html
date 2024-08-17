@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="/webjars/jquery/3.7.1/jquery.min.js"></script>
+<link href="css/index.css" rel="stylesheet"/>
+</head>
+<body>
+	<div th:replace="~{/fragments/header.html :: fragment-menu}"></div>
+	<!--
+		~{}: Thymeleaf에서 파일 경로를 나타내는 표현식입니다. 보통 ~{} 안에 경로를 적어 해당 파일을 참조합니다.
+		/fragments/header.html: 가져올 HTML 파일의 경로입니다. 이 경로에 있는 header.html 파일을 참조합니다.
+		::: 특정 부분(프래그먼트)을 참조하기 위한 구분자입니다. header.html 파일 내의 특정 부분을 가져오겠다는 의미입니다.
+		fragment-menu: header.html 파일 내에 정의된 프래그먼트 이름입니다. 이 이름을 가진 HTML 조각을 현재 문서에 삽입합니다.
+-->
+	<h1 align="center">회원가입</h1>
+	
+	<form method="post" action="memberInsert" id="enrollForm">
+		<table align="center">
+			<tr>
+				<td>* ID</td>
+				<td>
+					<input name="id" id="id" required>
+					<div id="checkResult" style="font-size:0.8em; display:none;"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>* PWD</td>
+				<td><input type="password" name="password" required></td>
+			</tr> 
+			<tr>
+				<td>* NAME</td>
+				<td><input name="name" required></td>
+			</tr>
+			<tr>
+				<td>EMAIL</td>
+				<td><input type="email" name="email"></td>
+			</tr>
+			<tr>
+				<td>BIRTHDAY</td>
+				<td><input name="birthday" placeholder="2024-01-19"></td>
+			</tr>
+			<tr>
+				<td>GENDER</td>
+				<td>
+					<input type="radio" name="gender" value="M">남
+					<input type="radio" name="gender" value="F">여
+				</td>
+			</tr>
+			<tr>
+				<td>PHONE</td>
+				<td><input name="phone" placeholder="-포함"></td>
+			</tr>
+			<tr>
+				<td>ADDRESS</td>
+				<td><input name="address"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="submit" value="회원가입">
+					<input type="reset" value="초기화">
+				</td>
+			</tr>
+		</table>
+	</form>
+	
+	<script>
+		$(()=>{
+			const $idInput = $("#id");
+			$idInput.keyup(function() {
+				if($idInput.val().length >= 5) {
+					$.ajax({
+						url : "idCheck",
+						data : {id: $idInput.val()},
+						success : function(result) {
+							console.log(result);
+							if(result) {
+								$("#checkResult").show();
+								$("#checkResult").css("color","red").text("중복된 아이디 입니다. 다시 입력해주세요");
+							} else {
+								$("#checkResult").show();
+								$("#checkResult").css("color","green").text("사용할 수 있는 아이디 입니다");
+							}
+						},
+						error:function() {
+							console.log("아이디 중복체크 ajax통신 실패");
+						}
+					})
+				} else {
+					$("#checkResult").hide();
+				}
+			})
+		})
+	</script>
+		
+</body>
+</html>
+
+
+
+
+
