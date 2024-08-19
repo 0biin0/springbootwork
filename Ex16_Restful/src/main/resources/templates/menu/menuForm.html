@@ -69,7 +69,7 @@
 		<hr>
 		<script>
 			$(() => {
-				$("#typeSelector").on('change', e => {
+				$("#typeSelector").on('click', e => {
 					$.ajax({
 						url: `/menu/type/${e.target.value}`,
 						method:'GET',
@@ -122,6 +122,33 @@
 				})
 			})
 		</script>
+		
+		<!-- 4. POST /menu -->
+		<div class="menu-test">
+			<h3>메뉴 등록하기</h3>
+			<form name="menuEnrollFrm" id="menuEnrollFrm">
+				음식점 : <input name="restaurant" required><br><br>
+				메뉴명 : <input name="name" required><br><br>
+				가 격 : <input name="price" required><br><br>
+				<div class="menuRadio">
+					<input type="radio" name="type" value="KR">한식
+					<input type="radio" name="type" value="CH">중식
+					<input type="radio" name="type" value="JP">일식
+				</div>
+				<br><br>
+				<div class="menuRadio">
+					<input type="radio" name="taste" value="MILD">순한맛
+					<input type="radio" name="taste" value="HOT">매운맛
+				</div>
+				<br><br>
+				<button class="btn">등 록</button>
+			</form>
+		</div>
+		<hr>
+		<script>
+			
+		</script>
+		
 	</div>
 	
 	<script>
@@ -141,19 +168,52 @@
 							<tbody>
 						`;
 			// data반복처리
-			data.forEach(item => {
-				value += `<tr>
-							<td>${item.id}</td>
-							<td>${item.name}</td>
-							<td>${item.price}</td>
-							<td>${item.restaurant}</td>
-							<td>${item.taste}</td>
-							<td>${item.type}</td>
-						  </tr>`;
-			});
+			if(data.length > 0) {
+				data.forEach(item => {
+					value += `<tr>
+								<td><a href="javascript:findById('${item.id}')">${item.id}</a></td>
+								<td>${item.name}</td>
+								<td>${item.price}</td>
+								<td>${item.restaurant}</td>
+								<td>${item.taste}</td>
+								<td>${item.type}</td>
+							  </tr>`;
+				});
+			} else {
+				value += '<tr><td colspan="6" class="menu-test">조회된 결과가 없습니다</td></tr>'
+			}
 			value += `</tbody>
 						</table>`;
 			container.innerHTML = value;			
+		}
+		
+		const findById = id => {
+			$.ajax({
+				url: `/menu/${id}`,
+				method : 'GET',
+				success (result) {
+					console.log(result);
+				},
+				error(jqXHR, testStatus, errorMsg) {
+					// jQuery에서 파라미터 jqXHR, testStatus, errorMsg세가지를 제공
+					/*
+					- jqXHR 파라미터
+					  비동기를 처리하는 주객체는 XMLHttpRequest
+					  이것을 json으로 처리하는 것이 첫번재 인자로 들어옴(jqXHR)
+					  jqXHR.status : 500
+					  jqXHR.statusText : "error"
+					  jqXHR.reponseText : url의 full response
+					*/
+					console.log(`jqXHR : ${jqXHR}`);
+					console.log(`jqXHR.status : ${jqXHR.status}`);
+					console.log(`jqXHR.statusText : ${jqXHR.statusText}`);
+					console.log(`testStatus : ${testStatus}`);
+					console.log(`errorMsg : ${errorMsg}`);
+					if(jqXHR.status == 404) {
+						alert("조회한 메뉴는 없습니다.");
+					}
+				}
+			});
 		}
 	</script>
 </body>
