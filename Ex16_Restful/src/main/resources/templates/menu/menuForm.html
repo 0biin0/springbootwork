@@ -10,10 +10,10 @@
 	<!--
 	GET /menu : 전체메뉴조회
 	GET /menu/type/kr : 한식만 조회
-	GET /menu/type/ch : 한식만 조회
-	GET /menu/type/jp : 한식만 조회
+	GET /menu/type/ch : 중식만 조회
+	GET /menu/type/jp : 일식만 조회
 	GET /menu/taste/mild : 순한맛 조회
-	GET /menu/taste/hot : 순한맛 조회
+	GET /menu/taste/hot : 매운맛 조회
 	GET /menu/10 : 10번 메뉴 조회
 	
 	POST /menu : 메뉴한건 등록
@@ -52,7 +52,7 @@
 				})
 			})
 		</script>
-	</div>
+
 	
 	<script>
 		const menuTable = (selector, data) => {
@@ -86,6 +86,28 @@
 			container.innerHTML = value;			
 		}
 	</script>
+	
+	<!--GET /menu/type/kr : 한식만 조회 GET /menu/type/ch : 중식만 조회 GET /menu/type/jp : 일식만 조회-->
+	<div id="menu-test">
+		<h3>메뉴 타입별 조회</h3>
+		<select id="typeSelector">
+			<option value="" disabled selected>타입선택</option>
+			<option value="KR">한식</option>
+			<option value="CH">중식</option>
+			<option value="JP">일식</option>
+		</select>
+	</div>
+	<br>
+	<div class="result" id="menuType-result"></div>
+	<hr>
+	<script>
+		$(() => {
+			$("#typeSelector").on('click', e =>{
+				console.log(e.target.value);
+			})
+		})
+	</script>
+	</div>
 </body>
 </html>
 
