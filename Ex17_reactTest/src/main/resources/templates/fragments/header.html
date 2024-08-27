@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<link href="css/index.css" rel="stylesheet"/>
 <body>
 	<div th:fragment="fragment-menu">
 		<h1 align="center">SpringBoot HomePage</h1>
@@ -51,8 +50,8 @@
 
 		<table class="nav-area" align="center">
 			<tr>
-				<td>HOME</td>
-				<td>공지사항</td>
+				<td onclick="location.href='index'">HOME</td>
+				<td onclick="location.href='menuForm'">MENU</td>
 				<td onclick="location.href='list'">게시판</td>
 				<td>찾아오는길</td>
 			</tr>

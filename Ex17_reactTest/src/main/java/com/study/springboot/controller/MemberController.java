@@ -25,20 +25,14 @@ public class MemberController {
 	
 	@Autowired
 	MemberService memberService;
-	// 비즈니스 로직
-	// MemberService 타입의 빈을 자동으로 주입받습니다. MemberService는 일반적으로 비즈니스 로직을 처리하는 서비스 클래스
 	
 	@Autowired
 	PasswordEncoder passwordEncoder;
-	// 비밀번호 암호화
-	// PasswordEncoder 타입의 빈을 자동으로 주입받습니다. PasswordEncoder는 비밀번호를 암호화하거나 비교하는 데 사용
 	
 	@Autowired
 	HttpSession session;
-	// 세션 관리를 위해 사용
-	// HttpSession 객체를 자동으로 주입받습니다. 이를 통해 HTTP 세션에 접근하여 세션 데이터를 읽거나 쓸 수 있습니다.
 	
-	@RequestMapping("/") // root만 RequestMapping 사용
+	@RequestMapping("/")
 	public String root() {
 		return "index";
 	}
