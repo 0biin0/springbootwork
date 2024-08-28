@@ -55,7 +55,7 @@ public class MemberController {
 	
 	@GetMapping("/idCheck")
 	@ResponseBody
-	public boolean idCheck(@RequestParam("id") String id) {
+	public boolean idCheck(@RequestParam("id") String id) { //  HTTP 요청의 파라미터를 컨트롤러 메서드의 매개변수로 바인딩하는 데 사용되는 어노테이션
 		return memberService.idCheck(id);
 		/*
 		    역할: @ResponseBody 어노테이션이 붙은 메서드는 반환된 객체를 JSON, XML, 또는 다른 형태의 데이터를 응답 본문으로 변환하여 클라이언트에게 전달합니다.
@@ -74,7 +74,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("/login")
-	public String login(Member member, Model model) {
+	public String login(Member member, Model model) { //model 담아서 보내준다 (바구니)
 		Optional<Member> loginUser = memberService.login(member);
 		//null을 처리하는데 도움됨 Member객체가 있을수도 있고 없을수도 있다
 		if(loginUser.isPresent()) {
