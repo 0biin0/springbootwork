@@ -67,9 +67,11 @@ public class MemberController {
 	@PostMapping("/memberInsert")
 	public String memberInsert(Member member) {
 		String enPass = passwordEncoder.encode(member.getPassword());
-		//passwordEncoder : 비밀번호 암호화
+		//passwordEncoder : 비밀번호 암호화 / passwordEncoder라는 객체를 사용해 회원이 입력한 비밀번호를 암호화하고, 암호화된 비밀번호를 enPass 변수에 저장 encode는 암호화된 비밀번호를 문자열로
 		member.setPassword(enPass);
+		// 암호화된 비밀번호(enPass)를 member 객체의 비밀번호로 설정
 		memberService.memberInsert(member);
+		// memberService라는 서비스 객체를 통해 member 객체를 데이터베이스에 저장하는 작업을 수행
 		return "redirect:/";
 	}
 	
