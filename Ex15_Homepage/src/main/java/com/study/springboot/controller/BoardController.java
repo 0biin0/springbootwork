@@ -33,7 +33,6 @@ public class BoardController {
 		// 0: 한 페이지에 포함될 데이터의 개수입니다. 이 경우, 한 페이지당 10개의 게시글을 가져오도록 설정한 것
 		// Sort.by(Sort.Direction.DESC, "bno"): 정렬 기준을 지정
 		// Sort.Direction.DESC는 내림차순 정렬을 의미
-		// 
 		
 		int pagePerBlock = 5;	// [1][2][3][4][5]
 		int endPage = Math.min(pageList.getTotalPages(), nowPage + pagePerBlock);
@@ -60,6 +59,7 @@ public class BoardController {
 		model.addAttribute("board", boardService.selectDetail(bno).get());
 		// selectDetail(bno)는 bno(게시글 번호)를 이용해 특정 게시글의 상세 정보를 가져오는 메서드
 		model.addAttribute("reply", replyService.selectAll(bno));
+		
 		return "board/detailForm";
 	}
 
