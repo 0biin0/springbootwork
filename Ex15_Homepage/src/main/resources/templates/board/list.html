@@ -1,29 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link href="css/index.css" rel="stylesheet"/>
-<link href="css/boardList.css" rel="stylesheet"/>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link href="css/index.css" rel="stylesheet" />
+	<link href="css/boardList.css" rel="stylesheet" />
 </head>
+
 <body>
 	<div th:replace="~{/fragments/header.html :: fragment-menu}"></div>
 	<h1 align="center">게 시 판</h1>
 
-    <div class="outer">
-        <div th:text="|총 게시글의 수 : ${boardPage.totalElements}|"></div>
-        <table align="center" id="list-area">
-            <thead>
-                <tr>
-                    <th width="11%">글번호</th>
-                    <th width="45%">제목</th>
-                    <th width="14%">작성자</th>
-                    <th width="12%">조회수</th>
-                    <th width="18%">작성일</th>
-                </tr>
-            </thead>
-            <tbody>
+	<div class="outer">
+		<div th:text="|총 게시글의 수 : ${boardPage.totalElements}|"></div>
+		<!-- | | (파이프 기호): 이 기호는 문자열 템플릿을 정의하는 데 사용됩니다. 템플릿 내에서 변수 값을 포함할 수 있으며, 텍스트가 변수와 함께 안전하게 결합되도록 도와줍니다 -->
+		<table align="center" id="list-area">
+			<thead>
+				<tr>
+					<th width="11%">글번호</th>
+					<th width="45%">제목</th>
+					<th width="14%">작성자</th>
+					<th width="12%">조회수</th>
+					<th width="18%">작성일</th>
+				</tr>
+			</thead>
+			<tbody>
 				<tr th:each="board, state: ${boardPage}">
+					<!-- 
+    th:each="board, state: ${boardPage}":
+    
+    - th:each: Thymeleaf에서 반복문을 실행하는 속성입니다.
+    - board: 반복 중에 현재 아이템(게시글)을 담는 변수입니다.
+    - state: 반복 상태 정보를 담는 변수로, 인덱스, 첫/마지막 요소 여부 등을 확인할 수 있습니다.
+    - ${boardPage}: Model에서 전달된 객체로, 여러 게시글이 포함된 컬렉션이나 페이지 객체입니다.
+    
+    이 코드는 boardPage에 있는 각 게시글(board)에 대해 <tr> 태그를 반복 생성합니다.
+    -->
 					<!--/* <td th:text="${board.bno}"></td> 
 					<td th:text="${state.count}"></td> */-->
 					<td th:text="${boardPage.totalElements - nowPage*boardPage.size - state.index}"></td>
@@ -34,11 +47,11 @@
 					<td th:text="${board.count}"></td>
 					<td th:text="*{#temporals.format(board.createDate, 'yyyy-MM-dd')}"></td>
 				</tr>
-            </tbody>
-        </table>
-        
-        <!-- 페이징 처리 -->
-        <div align="center">
+			</tbody>
+		</table>
+
+		<!-- 페이징 처리 -->
+		<div align="center">
 			<a th:if="${nowPage > 0}" th:href="@{list(nowPage=${nowPage-1})}">Prev...</a>
 			<!--
 				thymeleaf에서는 #numbers라는 숫자 포맷 메소드를 지원
@@ -46,13 +59,15 @@
 			-->
 			<span th:each="pageNumber : ${#numbers.sequence(nowPage, endPage-1)}">
 				<strong th:if="${pageNumber == nowPage}" th:text="|[${pageNumber+1}]|"></strong>
-				<a th:unless="${pageNumber == nowPage}" th:href="@{list(nowPage=${pageNumber})}" th:text="|[${pageNumber+1}]|"></a>
+				<a th:unless="${pageNumber == nowPage}" th:href="@{list(nowPage=${pageNumber})}"
+					th:text="|[${pageNumber+1}]|"></a>
 			</span>
 			<a th:if="${nowPage < boardPage.totalPages-1}" th:href="@{list(nowPage=${nowPage+1})}">...Next</a>
 		</div>
-        <div th:if="${loginUser != null}" align="right">
+		<div th:if="${loginUser != null}" align="right">
 			<h4><a href="insertForm">[글쓰기]</a></h4>
 		</div>
-    </div>
+	</div>
 </body>
+
 </html>
